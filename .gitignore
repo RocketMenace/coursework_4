@@ -16,6 +16,12 @@ pyvenv.cfg
 pip-selfcheck.json
 .idea/
 poetry.lock
+errors.log
+src/__pycache__/
+cache/vacancy_cache.sqlite
+tests/__pycache__/
+src/errors.log
+
 
 ### VirtualEnv ###
 # Virtualenv
