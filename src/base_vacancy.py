@@ -12,4 +12,18 @@ class BaseVacancy(ABC):
         pass
 
     @abstractmethod
-    def __
+    def __ne__(self, other):
+        pass
+
+    @abstractmethod
+    def __gt__(self, other):
+        pass
+
+    @abstractmethod
+    def __lt__(self, other):
+        pass
+
+    @classmethod
+    @abstractmethod
+    def new_vacancy(cls, name, link, description, requirements, pay):
+        pass
