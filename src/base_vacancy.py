@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class BaseVacancy(ABC):
 
     @abstractmethod
-    def __init__(self, name, link, pay, description, requirements):
+    def __init__(self, name, link, pay, description):
         pass
 
     @abstractmethod
@@ -25,5 +25,5 @@ class BaseVacancy(ABC):
 
     @classmethod
     @abstractmethod
-    def new_vacancy(cls, name, link, description, requirements, pay):
+    def new_vacancy(cls, name, link, pay, description):
         pass
