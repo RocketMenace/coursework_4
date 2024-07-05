@@ -17,7 +17,7 @@ class Salary:
     @bottom_salary.setter
     def bottom_salary(self, value):
         if not value:
-            self._bottom_salary = "Не указано"
+            self._bottom_salary = "не указано"
         else:
             self._bottom_salary = value
 
@@ -28,7 +28,7 @@ class Salary:
     @top_salary.setter
     def top_salary(self, value):
         if not value:
-            self._top_salary = "Не указано"
+            self._top_salary = "не указано"
         else:
             self._top_salary = value
 
