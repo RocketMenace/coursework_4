@@ -49,3 +49,13 @@ class ParserHH(BaseParser):
                 logger.error(f"HTTP error occurred: {http_err}")
                 return None
 
+    def rename_keys(self) -> None:
+        for vacancy in self.vacancies:
+            if vacancy["salary"]:
+                vacancy["salary"]["bottom_salary"] = vacancy["salary"].pop("from")
+                vacancy["salary"]["top_salary"] = vacancy["salary"].pop("to")
+            else:
+                vacancy["salary"] = None
+
+
+

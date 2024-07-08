@@ -4,9 +4,9 @@ class Employer:
     name: str
     link: str
 
-    def __init__(self, name, link):
+    def __init__(self, name, url):
         self.name = name
-        self.link = link
+        self.url = url
 
     def __str__(self):
-        return f"{self.name} {self.link}"
+        return f"{self.name} {self.url}"

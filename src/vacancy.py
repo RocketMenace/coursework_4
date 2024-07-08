@@ -1,60 +1,65 @@
+from entities.employer import Employer
+from entities.salary import Salary
+from entities.vacancy_description import VacancyDescription
 from src.base_vacancy import BaseVacancy
-from src.parser_hh import ParserHH
 
 
 class Vacancy(BaseVacancy):
     name: str
     link: str
-    pay: int
-    description: str
+    pay: Salary
+    description: VacancyDescription
+    employer: Employer
 
-    def __init__(self, name, link, description, pay):
+    def __init__(self, name, link, pay, description, employer):
         self.name = name
         self.link = link
         self.pay = pay
         self.description = description
+        self.employer = employer
+
+    @property
+    def pay(self):
+        return self._pay
+
+    @pay.setter
+    def pay(self, value):
+        if value is None:
+            self._pay = "Зарплата не указана."
+        else:
+            self._pay = value
 
     @classmethod
-    def new_vacancy(cls, name, link, pay, description):
-        return cls(
-            name,
-            link,
-            pay,
-            description,
-        )
+    def cast_to_list_of_objects(cls, data: list[dict]):
+        vacancies = []
+        for item in data:
+            name = item["name"]
+            link = item["alternate_url"]
+            pay = Salary(**item["salary"]) if item["salary"] else None
+            description = VacancyDescription(**item["snippet"])
+            employer = Employer(
+                item["employer"]["name"], item["employer"].get("alternate_url")
+            )
+            vacancy = cls(name, link, pay, description, employer)
+            vacancies.append(vacancy)
+
+        return vacancies
+
+    def encode_to_dict(self):
+        """Method for serialization Vacancy class object."""
+        return {
+            "name": self.name,
+            "link": self.link,
+            "pay": self.pay.__str__(),
+            "description": self.description.__str__().replace("\n", " "),
+            "employer": self.employer.__str__(),
+        }
 
     def __repr__(self):
         return f"{type(self).__name__}({self.name}, {self.link}, {self.description}, {self.pay})"
 
     def __str__(self):
-        return f"{self.name},\n {self.link},\n {self.description},\n {self.pay}\n"
-
-    def __eq__(self, other) -> bool:
-        return self.pay == other.pay
-
-    def __ne__(self, other) -> bool:
-        return self.pay != other.pay
-
-    def __gt__(self, other) -> bool:
-        return self.pay > other.pay
-
-    def __lt__(self, other) -> bool:
-        return self.pay < other.pay
+        return f"{self.name},\n{self.link},\n{self.description},\n{self.pay}"
 
 
-parser = ParserHH()
-parser.load_vacancies("Python")
-content = parser.vacancies[:3]
-print(content)
-# vacancies = []
-# for item in content:
-#     vacancy = Vacancy.new_vacancy(
-#         item["name"],
-#         item["alternate_url"],
-#         item["snippet"]["responsibility"],
-#         item["snippet"]["requirement"],
-#         item["salary"]["to"],
-#     )
-#     vacancies.append(vacancy)
-# for v in vacancies:
-#     print(str(v))
+
