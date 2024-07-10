@@ -2,7 +2,7 @@
 
 class Employer:
     name: str
-    link: str
+    url: str
 
     def __init__(self, name, url):
         self.name = name

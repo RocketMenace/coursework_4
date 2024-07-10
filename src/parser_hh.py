@@ -58,3 +58,4 @@ class ParserHH(BaseParser):
                 vacancy["salary"]["top_salary"] = vacancy["salary"].pop("to")
             else:
                 vacancy["salary"] = None
+

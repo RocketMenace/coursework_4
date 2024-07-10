@@ -33,4 +33,5 @@ class User:
             return vacancies
 
     def show_vacancies(self, list_of_vacancies: list, number_of_vacancies: int) -> list:
+        """Returns list of vacancies specified length"""
         return list_of_vacancies[:number_of_vacancies + 1]
