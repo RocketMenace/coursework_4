@@ -38,12 +38,11 @@ class Salary:
         return f"Заработная плата в {self.currency} за вычетом налогов от {self.bottom_salary} -> до {self.top_salary}."
 
     def __eq__(self, other) -> bool:
-        if type(other) is Salary:
+        if isinstance(other, Salary):
             return self.top_salary == other.top_salary
-        elif isinstance(other.top_salary, (int, float)):
+        if isinstance(other, (int, float)):
             return self.top_salary == other
-        else:
-            raise TypeError
+        raise TypeError
 
     def __ne__(self, other) -> bool:
         return not self.__eq__(other)
@@ -52,18 +51,14 @@ class Salary:
         return not self.__lt__(other)
 
     def __lt__(self, other) -> bool:
-        if type(other) is Salary:
+        if isinstance(other, Salary):
             return self.top_salary < other.top_salary
-        elif isinstance(other, (int, float)):
+        if isinstance(other, (int, float)):
             return self.top_salary < other
-        else:
-            raise TypeError
+        raise TypeError
 
     def __le__(self, other) -> bool:
         return self.__lt__(other) or self.__eq__(other)
 
     def __ge__(self, other) -> bool:
         return not self.__lt__(other)
-
-
-

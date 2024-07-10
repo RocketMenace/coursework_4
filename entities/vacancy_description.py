@@ -1,4 +1,3 @@
-
 import re
 
 
@@ -17,8 +16,8 @@ class VacancyDescription:
         ]
         requirements_lines.extend([x for x in self._requirement.split(". ") if x])
         raw_string = "\n".join(requirements_lines)
-        html_pattern = re.compile('<.*?>')
-        return re.sub(html_pattern, '', raw_string)
+        html_pattern = re.compile("<.*?>")
+        return re.sub(html_pattern, "", raw_string)
 
     @requirement.setter
     def requirement(self, value):
@@ -34,7 +33,7 @@ class VacancyDescription:
         ]
         responsibility_lines.extend([x for x in self._responsibility.split(". ") if x])
         raw_string = "\n".join(responsibility_lines)
-        html_pattern = re.compile('<.*?>')
+        html_pattern = re.compile("<.*?>")
         return re.sub(html_pattern, "", raw_string)
 
     @responsibility.setter
@@ -46,5 +45,3 @@ class VacancyDescription:
 
     def __str__(self):
         return f"{self.requirement}\n{self.responsibility}"
-
-

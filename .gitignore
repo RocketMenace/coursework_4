@@ -162,4 +162,6 @@ cython_debug/
 .idea/
 cache/vacancy_cache.sqlite
 **/*.log
+.entities/__pycache__
+
 

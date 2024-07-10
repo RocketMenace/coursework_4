@@ -3,7 +3,8 @@ parser_hh.py
 =============
 This module provides tools for parsing hh.ru website. It includes methods for:
 
-1.Fetching vacancy's data
+1.Fetching vacancy's raw data.
+2.Renames keys in dicts.
 """
 
 from loguru import logger
@@ -50,12 +51,10 @@ class ParserHH(BaseParser):
                 return None
 
     def rename_keys(self) -> None:
+        """Replaces names of keys because of conflict with reserved words."""
         for vacancy in self.vacancies:
             if vacancy["salary"]:
                 vacancy["salary"]["bottom_salary"] = vacancy["salary"].pop("from")
                 vacancy["salary"]["top_salary"] = vacancy["salary"].pop("to")
             else:
                 vacancy["salary"] = None
-
-
-

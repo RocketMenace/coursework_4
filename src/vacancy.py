@@ -50,9 +50,9 @@ class Vacancy(BaseVacancy):
         return {
             "name": self.name,
             "link": self.link,
-            "pay": self.pay.__str__(),
-            "description": self.description.__str__().replace("\n", " "),
-            "employer": self.employer.__str__(),
+            "pay": str(self.pay),
+            "description": str(self.description).replace("\n", " "),
+            "employer": str(self.employer),
         }
 
     def __repr__(self):
@@ -60,6 +60,3 @@ class Vacancy(BaseVacancy):
 
     def __str__(self):
         return f"{self.name},\n{self.link},\n{self.description},\n{self.pay}"
-
-
-
