@@ -6,11 +6,11 @@ def test_salary_init(salary_example):
     salary_example.gross = True
     assert (
         str(salary_example)
-        == f"Заработная плата за вычетом налогов от {salary_example.bottom_salary} {salary_example.currency}. -> до {salary_example.top_salary} {salary_example.currency}."
+        == f"Заработная плата в {salary_example.currency} за вычетом налогов от {salary_example.bottom_salary} -> до {salary_example.top_salary}."
     )
 
 
-def test_salary_description_init(vacancy_description_example):
+def test_vacancy_description_init(vacancy_description_example):
     assert (
         vacancy_description_example.responsibility
         == "Обязанности: \nВыполнение указанных работ"
@@ -20,4 +20,6 @@ def test_salary_description_init(vacancy_description_example):
 
 def test_employer_init(employer_example):
     assert employer_example.name == "Test"
-    assert employer_example.link == "https://test.com"
+    assert employer_example.url == "https://test.com"
+
+

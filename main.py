@@ -1,7 +1,12 @@
+"""
+Main module program for interacting with user.
+"""
+
+
 from src.parser_hh import ParserHH
 from src.vacancy import Vacancy
 from src.user import User
-
+from src.json_file_manager import JSONFileManager
 
 
 def user_interaction():
@@ -20,6 +25,8 @@ def user_interaction():
     ranged_vacancies = user.vacancy_filter_by_salary(filtered_vacancies, salary_range)
     sorted_vacancies = user.sort_vacancy_by_salary(ranged_vacancies)
     top_vacancies = user.show_vacancies(sorted_vacancies, top_n)
+    serialized_vacancies = [Vacancy.encode_to_dict(x) for x in top_vacancies]
+    JSONFileManager().write_vacancy_to_file(serialized_vacancies)
     return top_vacancies
 
 
