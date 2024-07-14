@@ -1,10 +1,12 @@
 """
 parser_hh.py
 =============
-This module provides tools for parsing hh.ru website. It includes methods for:
+This module provides tools for parsing hh.ru website. The parsing process is accomplished by creating
+cached requests. It also includes methods for:
 
 1.Fetching vacancy's raw data.
 2.Renames keys in dicts.
+3.Logging errors are implemented with help of Loguru library.
 """
 
 from loguru import logger
@@ -29,7 +31,7 @@ class ParserHH(BaseParser):
         """Method for fetching raw data from specified self.url."""
         session = CachedSession(cache_name="../cache/vacancy_cache", expire_after=600)
 
-        self.params["text"] = keyword
+        self.params["text"] = keyword.title()
         while self.params.get("page") != 20:
             try:
                 response = session.get(

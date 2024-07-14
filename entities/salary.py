@@ -1,3 +1,9 @@
+"""
+This module includes tools for creating Salary object instances for further using in Vacancy class.
+Includes methods for comparing objects between each other by top salary.
+"""
+
+
 class Salary:
     bottom_salary: int
     top_salary: int
@@ -12,6 +18,7 @@ class Salary:
 
     @property
     def bottom_salary(self):
+        """Bottom salary property."""
         return self._bottom_salary
 
     @bottom_salary.setter
@@ -23,6 +30,7 @@ class Salary:
 
     @property
     def top_salary(self):
+        """Top salary property."""
         return self._top_salary
 
     @top_salary.setter
@@ -42,7 +50,6 @@ class Salary:
             return self.top_salary == other.top_salary
         if isinstance(other, (int, float)):
             return self.top_salary == other
-        raise TypeError
 
     def __ne__(self, other) -> bool:
         return not self.__eq__(other)
@@ -55,7 +62,6 @@ class Salary:
             return self.top_salary < other.top_salary
         if isinstance(other, (int, float)):
             return self.top_salary < other
-        raise TypeError
 
     def __le__(self, other) -> bool:
         return self.__lt__(other) or self.__eq__(other)

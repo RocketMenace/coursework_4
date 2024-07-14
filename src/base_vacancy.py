@@ -1,3 +1,7 @@
+"""
+Abstract base class for creating Vacancy.
+"""
+
 from abc import ABC, abstractmethod
 
 

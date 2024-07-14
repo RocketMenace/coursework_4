@@ -1,3 +1,13 @@
+"""
+This module creates object type User for interacting with user in main module program.
+It includes methods for :
+1.Filtration vacancies by keywords that are located in vacancy description.
+2.Filtration vacancies by top salary.
+3.Sorting vacancies by salary in ascending order.
+4.Presents a list of vacancies to the user in a convenient way.
+"""
+
+
 from src.vacancy import Vacancy
 
 
@@ -7,14 +17,16 @@ class User:
     def __init__(self, name):
         self.name = name.title()
 
-    def vacancy_filter_by_keywords(self, vacancies: list[Vacancy], keywords: list[str]):
+    def vacancy_filter_by_keywords(self, vacancies: list[Vacancy], keywords=None):
         """Filters out items from list by specified keywords."""
-        filtered_vacancies: list = []
-        for keyword in keywords:
-            for vacancy in vacancies:
-                if keyword in str(vacancy.description) and vacancy not in filtered_vacancies:
-                    filtered_vacancies.append(vacancy)
-        return filtered_vacancies
+        if keywords:
+            filtered_vacancies: list = []
+            for keyword in keywords:
+                for vacancy in vacancies:
+                    if keyword.title() in str(vacancy.description) and vacancy not in filtered_vacancies:
+                        filtered_vacancies.append(vacancy)
+            return filtered_vacancies
+        return vacancies
 
     def vacancy_filter_by_salary(self, vacancies: list[Vacancy], salary_range: str) -> list[Vacancy]:
         """Returns list of vacancies if salary in specified range."""
@@ -28,7 +40,7 @@ class User:
     def sort_vacancy_by_salary(self, vacancies: list[Vacancy]):
         """Returns list of vacancies are sorted by salary."""
         try:
-            return sorted(vacancies, key=lambda vacancy: vacancy.pay)
+            return sorted(vacancies)
         except TypeError as err:
             return vacancies
 

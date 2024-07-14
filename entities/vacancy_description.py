@@ -1,3 +1,9 @@
+"""
+This module includes tools for creating VacancyDescription object instances for further using in Vacancy class.
+It uses regular expressions library for deleting html tags from description.
+"""
+
+
 import re
 
 
